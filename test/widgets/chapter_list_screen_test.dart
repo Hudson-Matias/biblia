@@ -19,7 +19,7 @@ void main() {
 
     // Constrói o widget de teste
     await tester.pumpWidget(
-      const MaterialApp(
+      MaterialApp(
         home: ChapterListScreen(),
       ),
     );
