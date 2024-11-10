@@ -1,21 +1,66 @@
 class Book {
-  final String abbrev;
   final String name;
-  final List<List<String>> chapters;
+  final String author;
+  final String date;
+  final String purpose;
+  final String curiosity;
+  final List<Chapter> chapters;
 
-  Book({required this.abbrev, required this.name, required this.chapters});
+  Book({
+    required this.name,
+    required this.author,
+    required this.date,
+    required this.purpose,
+    required this.curiosity,
+    required this.chapters,
+  });
 
   factory Book.fromJson(Map<String, dynamic> json) {
     return Book(
-      abbrev: json['abbrev'],
-      name: json['book'],
-      chapters: List<List<String>>.from(
-        json['chapters'].map((chapter) => List<String>.from(chapter)),
-      ),
+      name: json['name'],
+      author: json['author'],
+      date: json['date'],
+      purpose: json['purpose'],
+      curiosity: json['curiosity'],
+      chapters: (json['chapters'] as List<dynamic>)
+          .map((chapter) => Chapter.fromJson(chapter))
+          .toList(),
     );
   }
+}
 
-  static List<Book> fromJsonList(List<dynamic> jsonList) {
-    return jsonList.map((json) => Book.fromJson(json)).toList();
+class Chapter {
+  final int number;
+  final List<Verse> verses;
+
+  Chapter({
+    required this.number,
+    required this.verses,
+  });
+
+  factory Chapter.fromJson(Map<String, dynamic> json) {
+    return Chapter(
+      number: json['number'],
+      verses: (json['verses'] as List<dynamic>)
+          .map((verse) => Verse.fromJson(verse))
+          .toList(),
+    );
+  }
+}
+
+class Verse {
+  final int number;
+  final String text;
+
+  Verse({
+    required this.number,
+    required this.text,
+  });
+
+  factory Verse.fromJson(Map<String, dynamic> json) {
+    return Verse(
+      number: json['number'],
+      text: json['text'],
+    );
   }
 }
