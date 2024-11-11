@@ -1,4 +1,4 @@
-import 'package:biblia/service/bibleService.dart';
+import 'package:biblia/service/bible_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/testing.dart';
 import 'package:mockito/mockito.dart';

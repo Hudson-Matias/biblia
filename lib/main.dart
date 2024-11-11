@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
-import 'screens/bookListScreen.dart';
-import 'screens/suggestionListScreen.dart';
+import 'screens/book_list_screen.dart';
+import 'screens/suggestion_list_screen.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Aplicativo da Bíblia',
+      title: 'Bíblia App com Sugestões',
       theme: ThemeData(primarySwatch: Colors.blue),
       home: MainScreen(),
     );
@@ -22,7 +24,18 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
-  final List<Widget> _screens = [BookListScreen(), SuggestionListScreen()];
+
+  // Lista das telas disponíveis
+  final List<Widget> _screens = [
+    BookListScreen(),
+    SuggestionListScreen(),
+  ];
+
+  void _onTabTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,18 +43,14 @@ class _MainScreenState extends State<MainScreen> {
       body: _screens[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
+        onTap: _onTabTapped,
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.book),
-            label: 'Livros',
+            label: 'Bíblia',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.feedback),
+            icon: Icon(Icons.comment),
             label: 'Sugestões',
           ),
         ],
